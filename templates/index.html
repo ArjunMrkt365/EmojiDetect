@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<title>Upload File</title>
+<h1>Upload File</h1>
+<a href="{{ url_for('upload_file') }}">Upload</a> /
+<a href="{{ url_for('manage_file') }}">Manage</a>
+<hr>
+
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.photo()}}
+    {% for error in form.photo.errors %}
+        <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    {{ form.submit }}
+</form>
+<!--<button onClick="load()">Upload with Camera</button>
+<button id="#btn" style="display:none;" onClick="load1()">Click!</button>
+<img id="myimage"></img>-->
+{% if success.success %}
+<br>
+<img src="data:image/png;base64, {{success.image}}"/>
+<p>Upload Success!</p>
+{% endif %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+<script>
+
+function load(){
+$("#btn").display();
+$("#myimage").attr('src',"{{ url_for('video_feed') }}");
+
+
+}
+
+</script>
+<script type="text/javascript">
+    function load1()
+    {	  
+       $.ajax({                       // initialize an AJAX request
+       type:"GET",
+           url: "/video_feed/",                    // set the url of the request (= localhost:5000/hr/ajax/load-cities/)
+           data: {"val":1}      // add the country id to the GET parameters}
+           success: function (msg) {   // `data` is the return of the `load_cities` view function
+    		$("#img")
+    	}
+	}
+    )}
+</script>
